@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serula</title>
+    <!-- Father Icon -->
+    <script src="https://unpkg.com/feather-icons"></script>
+    <!-- My Css -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Start Navbar -->
+    <nav class="navbar">
+        <a href="#" class="navbar-logo"><img src="{{ url_for('static', filename='logo/serula.svg') }}" alt=""></a>
+        
+        <div class="navbar-nav">
+            <a href="#">Beranda</a>
+            <a href="#">Tentang</a>
+            <a href="#">Pengembang</a>
+        </div>
+        
+        <a href="#" id="hamburger-menu"><i data-feather="menu"></i></a>
+    </nav>
+    <!-- End Navbar -->
+
+    <!-- Start Hero Section -->
+    <section class="hero" id="beranda">
+        <!-- Tagline-->
+        <div class="content">
+            <h1 class="title">Transformasikan Cara Anda Menilai dengan Sistem Evaluasi RULA Menggunakan MediaPipe</h1>
+            <h2 class="subtitle">Sederhana, Cepat, dan Akurat - Dapatkan Hasil Evaluasi Anda dalam Hitungan Detik</h2>
+        </div>
+        <!-- Droparea-->
+        <div class="drop-area" id="drop-area">
+            <!-- Box-->
+            <div id="box-drop-area">
+                <div id="upload-cloud">
+                    <img src="{{ url_for('static', filename='logo/upload-cloud.svg') }}" alt="">
+                </div>
+                <div class="instruction">
+                    <div class="instruction-text">Pilih file atau seret dan lepas di sini</div>
+                    <div class="file-types">JPG, PNG, JPEG atau GIF</div>
+                </div>
+                <button id="upload-button">Unggah Gambar</button>
+                <div id="preview-container"></div>
+            </div>
+            <!-- Box-->
+        </div>
+        <form id="upload-form" method="post" action="/adjustment" enctype="multipart/form-data">
+            <input type="file" id="file-input" name="file" class="form-control" autocomplete="off" required>
+            <button type="submit" id="submit-button">Submit</button>
+        </form>
+    </section>
+    <!-- End Hero Section -->
+
+    <script>
+        feather.replace();
+    </script>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

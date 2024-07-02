@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adjustment</title>
+       <!-- Father Icon -->
+       <script src="https://unpkg.com/feather-icons"></script>
+       <!-- My Css -->
+       <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+       <!-- Fonts -->
+       <link rel="preconnect" href="https://fonts.googleapis.com">
+       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+       <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="#" class="navbar-logo"><img src="{{ url_for('static', filename='logo/serula.svg') }}" alt=""></a>
+        <p class="navbar-title">Adjustment Image</p>
+    </nav>
+    
+    <div class="drop-area-adjustment" id="drop-area">
+        <!-- Box-->
+        <div id="box-drop-area">
+            <div class="image">
+                <img src="{{ url_for('display_image', filename=filename) }}">
+            </div>
+        </div>
+        <!-- Box-->
+    </div>
+    <div class="content-adjustment">
+        <form id="adjustmentForm" onsubmit="return collectAdjustments()" action="/analyze" method="post" enctype="multipart/form-data">
+            <div class="col">
+                <div class="fieldset-c">
+                    <div class="legend-a">
+                        <legend>Detail Work</legend>
+                    </div>
+                    <div class="field">
+                        <div class="fill">
+                            <label for="worker-name">Name</label><br>
+                            <input type="text" id="worker-name" name="worker-name" required><br><br>
+                        </div>
+                        <div class="fill">
+                            <label for="job-location">Job Location</label><br>
+                            <input type="text" id="job-location" name="job-location" required><br><br>
+                        </div>
+                        <div class="fill">
+                            <label for="job-name">Job Name</label><br>
+                            <input type="text" id="job-name" name="job-name" required><br><br>
+                        </div>
+                        <div class="fill">
+                            <label class="h3">Image View</label><br>
+                            <div class="radio-orientation">
+                                <div class="radio-view-fill">
+                                    <input type="radio" id="left-view" name="image-view" value="Left" required>
+                                    <label style="font-weight: 400;" for="left-view">Left</label><br><br>
+                                </div>
+                                <div class="radio-view-fill">
+                                    <input type="radio" id="right-view" name="image-view" value="Right" required>
+                                    <label style="font-weight: 400;" for="right-view">Right</label><br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <!-- Group A Adjustments -->
+                <div class="fieldset-a">
+                    <div class="legend-a">
+                        <legend>Group A - Arm and Wrist Positions</legend>
+                    </div>
+                    <div class="field">
+                        <!-- Locate Upper Arm Position -->
+                        <h3>1. Locate Upper Arm Position</h3>
+                        <label><input type="checkbox" name="upper_arm_position" value="1" data-text="Shoulder is raised">Shoulder is raised (+1)</label><br>
+                        <label><input type="checkbox" name="upper_arm_position" value="1" data-text="Upper arm is abducted">Upper arm is abducted (+1)</label><br>
+                        <label><input type="checkbox" name="upper_arm_position" value="-1" data-text="Arm is supported or person is leaning">Arm is supported or person is leaning (-1)</label><br>       
+                    </div>
+                    <div class="field">
+                        <!-- Locate Lower Arm Position -->
+                        <h3>2. Locate Lower Arm Position</h3>
+                        <label><input type="checkbox" name="lower_arm_position" value="1" data-text="Arm working across midline or out to side">Arm working across midline or out to side (+1)</label><br>
+                    </div>
+                    <div class="field">
+                        <!-- Locate Wrist Position -->
+                        <h3>3. Locate Wrist Position</h3>
+                        <label><input type="checkbox" name="wrist_position" value="1" data-text="Wrist bent from midline">Wrist bent from midline (+1)</label><br>
+                    </div>
+                    <div class="field">
+                        <!-- Wrist Twist -->
+                        <h3>4. Wrist Twist</h3>
+                        <label><input type="radio" name="wrist_twist" value="1" data-text="Twisted in mid-range" required>Twisted in mid-range (+1)</label><br>
+                        <label><input type="radio" name="wrist_twist" value="2" data-text="At or near end of range" required>At or near end of range (+2)</label><br>
+                    </div>
+                    <div class="field">
+                        <h3>5. Add Muscle Use</h3>
+                        <label><input type="checkbox" name="add_muscle_a" value="1" data-text="If posture mainly static (i.e. held>10 minutes), Or if action repeated occurs 4x per minute">If posture mainly static (i.e. held>10 minutes), Or if action repeated occurs 4x per minute (+1)</label><br>
+                    </div>
+                    <div class="field">
+                        <h3>6. Add Force/Load</h3>
+                        <label><input type="radio" name="add_force_a" value="0" data-text="If load < 4.4 lbs. (intermittent)" required>If load < 4.4 lbs. (intermittent) (+0)</label><br>
+                        <label><input type="radio" name="add_force_a" value="1" data-text="If load 4.4 to 22 lbs. (intermittent)" required>If load 4.4 to 22 lbs. (intermittent) (+1)</label><br>
+                        <label><input type="radio" name="add_force_a" value="2" data-text="If load 4.4 to 22 lbs. (static or repeated)" required>If load 4.4 to 22 lbs. (static or repeated) (+2)</label><br>
+                        <label><input type="radio" name="add_force_a" value="3" data-text="If more than 22 lbs. or repeated or shocks" required>If more than 22 lbs. or repeated or shocks (+3)</label><br>
+                    </div>
+                </div>
+    
+                <!-- Group B Adjustments -->
+                <div class="fieldset-b">
+                    <div class="legend-b">
+                        <legend>Group B - Neck, Trunk, and Legs Positions</legend>
+                    </div>
+                    <div class="field">
+                        <!-- Locate Neck Position -->
+                        <h3>1. Locate Neck Position</h3>
+                        <label><input type="checkbox" name="neck_position" value="1" data-text="Neck is twisted">Neck is twisted (+1)</label><br>
+                        <label><input type="checkbox" name="neck_position" value="1" data-text="Neck is side bending">Neck is side bending (+1)</label><br>
+                    </div>                    
+                    <div class="field">
+                        <!-- Locate Trunk Position -->
+                        <h3>2. Locate Trunk Position</h3>
+                        <label><input type="checkbox" name="trunk_position" value="1" data-text="Trunk is twisted">Trunk is twisted (+1)</label><br>
+                        <label><input type="checkbox" name="trunk_position" value="1" data-text="Trunk is side bending">Trunk is side bending (+1)</label><br>
+                    </div>                    
+                    <div class="field">
+                        <!-- Legs Position -->
+                        <h3>3. Legs Position</h3>
+                        <label><input type="radio" name="legs_position" value="1" data-text="Legs and feet are supported" required>Legs and feet are supported (+1)</label><br>
+                        <label><input type="radio" name="legs_position" value="2" data-text="Not supported" required>Not supported (+2)</label><br>
+                    </div>
+                    <div class="field">
+                        <h3>5. Add Muscle Use</h3>
+                        <label><input type="checkbox" name="add_muscle_b" value="1" data-text="If posture mainly static (i.e. held>10 minutes), Or if action repeated occurs 4x per minute">If posture mainly static (i.e. held>10 minutes), Or if action repeated occurs 4x per minute (+1)</label><br>
+                    </div>
+                    <div class="field">
+                        <h3>6. Add Force/Load</h3>
+                        <label><input type="radio" name="add_force_b" value="0" data-text="If load < 4.4 lbs. (intermittent)" required>If load < 4.4 lbs. (intermittent) (+0)</label><br>
+                        <label><input type="radio" name="add_force_b" value="1" data-text="If load 4.4 to 22 lbs. (intermittent)" required>If load 4.4 to 22 lbs. (intermittent) (+1)</label><br>
+                        <label><input type="radio" name="add_force_b" value="2" data-text="If load 4.4 to 22 lbs. (static or repeated)" required>If load 4.4 to 22 lbs. (static or repeated) (+2)</label><br>
+                        <label><input type="radio" name="add_force_b" value="3" data-text="If more than 22 lbs. or repeated or shocks" required>If more than 22 lbs. or repeated or shocks (+3)</label><br>
+                    </div>
+                </div>
+            </div>
+            <input class="btn" type="submit" value="Analyze" name="adjustments" id="adjustments">
+        </form>
+    </div>
+
+    <script>
+        feather.replace();
+
+        // Ambil nilai session['filename']
+        const filename = "{{ session['filename'] }}";
+
+        // Fungsi untuk mengarahkan kembali ke halaman index dengan parameter query string
+        function redirectToIndex() {
+            if (filename) {
+                // Jika ada filename, arahkan kembali ke halaman index dengan parameter query string
+                window.location.href = "{{ url_for('index') }}?image=" + encodeURIComponent(filename);
+            } else {
+                // Jika tidak ada filename, arahkan kembali ke halaman index tanpa parameter query string
+                window.location.href = "{{ url_for('index') }}";
+            }
+        }
+
+        // Tambahkan event listener untuk tombol back
+        document.getElementById("back").addEventListener("click", redirectToIndex);
+
+        function collectAdjustments() {
+            let adjustments = {};
+            document.querySelectorAll('input[type="checkbox"]:checked, input[type="radio"]:checked').forEach(input => {
+                const name = input.name;
+                if (!adjustments[name]) {
+                    adjustments[name] = [];
+                }
+                adjustments[name].push(input.getAttribute('data-text'));
+            });
+            document.getElementById('adjustments').value = JSON.stringify(adjustments);
+            return true; // Allow form submission
+        }
+    </script>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

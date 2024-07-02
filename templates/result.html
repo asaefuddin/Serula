@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result</title>
+       <!-- Father Icon -->
+       <script src="https://unpkg.com/feather-icons"></script>
+       <!-- My Css -->
+       <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+       <!-- Fonts -->
+       <link rel="preconnect" href="https://fonts.googleapis.com">
+       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+       <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="#" class="navbar-logo"><img src="{{ url_for('static', filename='logo/serula.svg') }}" alt=""></a>
+        <p class="navbar-title">Result Evaluation</p>
+    </nav>
+    
+    <div class="drop-area-adjustment" id="drop-area">
+        <!-- Box-->
+        <div id="box-drop-area">
+            <div class="image">
+                <img src="{{ image_path }}" alt="Result">
+            </div>
+        </div>
+        <!-- Box-->
+    </div>
+    <div class="container">
+        <div class="content-result">
+            <h1>
+                Resume
+            </h1>
+            <div class="profil">
+                <div class="profil-result">
+                    <h3>Name</h3>
+                    <div>{{ desc_data.worker_name }}</div>
+                </div>
+                <div class="profil-result">
+                    <h3>Job Location</h3>
+                    <div>{{ desc_data.job_location }}</div>
+                </div>
+                <div class="profil-result">
+                    <h3>Job Name</h3>
+                    <div>{{ desc_data.job_name }}</div>
+                </div>
+                <div class="profil-result">
+                    <h3>View Orientation</h3>
+                    <div>{{ score_data.image_view }}</div>
+                </div>
+            </div>
+            <div class="result-item">
+                <!-- Arm and Wrist Analysis -->
+                <div class="awa">
+                        <div class="tittle">
+                            <h3>Arm and Wrist Analysis</h3>
+                        </div>
+                        <div class="result">
+                            <h3>Locate Upper Arm Position</h3>
+                            <h4>Upper Arm Angle
+                                <div class="result-data">
+                                    <div class="result-value">
+                                        {{ angles_data.shoulder_angle }}<span>&#176;</span>
+                                    </div>
+                                    <div>~</div>
+                                    <div class="result-cov">
+                                        {{ score_data.upper_arm_score }}
+                                    </div>
+                                </div>
+                            </h4>
+                            <h4>Adjust
+                                <div class="result-cov">
+                                    {{ score_data.upper_arm_position_int }}
+                                </div>
+                                <div class="result-cov-str">
+                                    <ul>
+                                        {% for item in score_data.upper_arm_position_str %}
+                                            <li>{{ item }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </h4>
+                            <h4>Upper Arm Score
+                                <div class="result-cov">
+                                    {{ score_data.total_upper_arm_score }}
+                                </div>
+                            </h4>
+                        </div>
+                        <div class="result">
+                            <h3>Locate Lower Arm Positionn</h3>
+                            <h4>Lower Arm Angle 
+                                <div class="result-data">
+                                    <div class="result-value">
+                                        {{ angles_data.elbow_angle }}<span>&#176;</span>
+                                    </div>
+                                    <div>~</div>
+                                    <div class="result-cov">
+                                        {{ score_data.lower_arm_score }}
+                                    </div>
+                                </div>
+                            </h4>
+                            <h4>Adjust
+                                <div class="result-cov">
+                                    {{ score_data.lower_arm_position_int }}
+                                </div>
+                                <div class="result-cov-str">
+                                    <ul>
+                                        {% for item in score_data.lower_arm_position_str %}
+                                            <li>{{ item }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </h4>
+                            <h4>Lower Arm Score <div class="result-cov">{{ score_data.total_lower_arm_score }}</div></h4>
+                        </div>
+                        <div class="result">
+                            <h3>Locate Wrist Position</h3>
+                            <h4>Wrist Angle 
+                                <div class="result-data">
+                                    <div class="result-value">
+                                        {{ angles_data.wrist_angle }}<span>&#176;</span>
+                                    </div>
+                                    <div>~</div>
+                                    <div class="result-cov">
+                                        {{ score_data.wrist_score }}
+                                    </div>
+                                </div>
+                            </h4>
+                            <h4>Adjust
+                                <div class="result-cov">
+                                    {{ score_data.wrist_position_int }}
+                                </div>
+                                <div class="result-cov-str">
+                                    <ul>
+                                        {% for item in score_data.wrist_position_str %}
+                                            <li>{{ item }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </h4>
+                            <h4>Wrist Score <div class="result-cov">{{ score_data.total_wrist_score }}</div></h4>
+                        </div>
+                        <div class="result">
+                            <h3>Wrist Twist</h3>
+                            <h4>Wrist Twist Score 
+                                <div class="result-cov">
+                                    {{ score_data.wrist_twist_int }}
+                                </div>
+                                <div class="result-cov-str">
+                                    <ul>
+                                        {% for item in score_data.wrist_twist_str %}
+                                            <li>{{ item }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </h4>
+                        </div>
+                        <div class="result">
+                            <h3>Posture Score A<div class="result-cov">{{ score_data.Tabel_a }}</div></h3>
+                        </div>
+                        <div class="operator">
+                            <div>+</div>
+                        </div>
+                        <div class="result">
+                            <h3>Add Muscle Use Score
+                                <div class="result-cov" style="margin-left: 20px; margin-right: 20px;">
+                                    {{ score_data.add_muscle_a_int }}
+                                </div>
+                                <div class="result-cov-str">
+                                        <ul>
+                                            {% for item in score_data.add_muscle_a_str %}
+                                                <li>{{ item }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                </div>
+                            </h3>
+                        </div>
+                        <div class="operator">
+                            <div>+</div>
+                        </div>
+                        <div class="result">
+                            <h3>Add Force/Load Score
+                                <div class="result-cov" style="margin-left: 20px; margin-right: 20px;">
+                                    {{ score_data.add_force_a_int }}
+                                </div>
+                                <div class="result-cov-str">
+                                 
+                                        <ul>
+                                            {% for item in score_data.add_force_a_str %}
+                                                <li>{{ item }}</li>
+                                            {% endfor %}
+                                        </ul>
+
+                              
+                                </div>
+                            </h3>
+                        </div>
+                        <div class="operator">
+                            <div>
+                                =
+                            </div>
+                        </div>
+                        <div class="result">
+                            <h3>Wrist & Arm Score<div class="result-cov">{{ score_data.final_tabel_a }}</div></h3>
+                        </div>
+                </div>
+                <!-- Neck, Trunk and Leg Analysis -->
+                <div class="ntla">
+                    <div class="tittle">
+                        <h3>Neck, Trunk and Leg Analysis</h3>
+                    </div>
+                    <div class="result">
+                        <h3>Locate Neck Position</h3>
+                        <h4>Neck Angle 
+                            <div class="result-data">
+                                <div class="result-value">
+                                    {{ angles_data.neck_angle }}<span>&#176;</span>
+                                </div>
+                                <div>~</div>
+                                <div class="result-cov">
+                                    {{ score_data.neck_score }}
+                                </div>
+                            </div>
+                        </h4>
+                        <h4>Adjust 
+                            <div class="result-cov">
+                                {{ score_data.neck_position_int }}
+                            </div>
+                            <div class="result-cov-str">
+                                
+                                    <ul>
+                                        {% for item in score_data.neck_position_str  %}
+                                            <li>{{ item }}</li>
+                                        {% endfor %}
+                                    </ul>
+                               
+                            </div>
+                        </h4>
+                        <h4>Neck Score <div class="result-cov">{{ score_data.total_neck_score }}</div></h4>
+                    </div>
+                    <div class="result">
+                        <h3>Locate Trunk Positionn</h3>
+                        <h4>Trunk Angle
+                            <div class="result-data">
+                                <div class="result-value">
+                                    {{ angles_data.trunk_angle }}<span>&#176;</span>
+                                </div>
+                                <div>~</div>
+                                <div class="result-cov">
+                                    {{ score_data.trunk_score }}
+                                </div>
+                            </div>
+                        </h4>
+                        <h4>Adjust 
+                            <div class="result-cov">
+                                {{ score_data.trunk_position_int }}
+                            </div>
+                            <div class="result-cov-str">
+                               
+                                    <ul>
+                                        {% for item in score_data.trunk_position_str  %}
+                                            <li>{{ item }}</li>
+                                        {% endfor %}
+                                    </ul>
+
+                              
+                            </div>
+                        </h4>
+                        <h4>Trunk Score <div class="result-cov">{{ score_data.total_trunk_score }}</div></h4>
+                    </div>
+                    <div class="result">
+                        <h3>Legs</h3>
+                        <h4>Legs Score 
+                            <div class="result-cov">
+                                {{ score_data.legs_position_int }}
+                            </div>
+                            <div class="result-cov-str">
+                              
+                                    <ul>
+                                        {% for item in score_data.legs_position_str  %}
+                                            <li>{{ item }}</li>
+                                        {% endfor %}
+                                    </ul>
+                            </div>
+                        </h4>
+                    </div>
+                    <div class="result">
+                        <h3>Posture Score B<div class="result-cov">{{ score_data.Tabel_b }}</div></h3>
+                    </div>
+                    <div class="operator">
+                        <div>+</div>
+                    </div>
+                    <div class="result">
+                        <h3>Add Muscle Use Score
+                            <div class="result-cov" style="margin-left: 20px; margin-right: 20px;">
+                                {{ score_data.add_muscle_b_int }}
+                            </div>
+                            <div class="result-cov-str">
+                              
+                                    <ul>
+                                        {% for item in score_data.add_muscle_b_str   %}
+                                            <li>{{ item }}</li>
+                                        {% endfor %}
+                                    </ul>
+
+                            </div>
+                        </h3>
+                    </div>
+                    <div class="operator">
+                        <div>+</div>
+                    </div>
+                    <div class="result">
+                        <h3>Add Force/Load Score
+                            <div class="result-cov" style="margin-left: 20px; margin-right: 20px;">
+                                {{ score_data.add_force_b_int }}
+                            </div>
+                            <div class="result-cov-str">
+                               
+                                    <ul>
+                                        {% for item in score_data.add_force_b_str   %}
+                                            <li>{{ item }}</li>
+                                        {% endfor %}
+                                    </ul>
+
+                            
+                            </div>
+                        </h3>
+                    </div>
+                    <div class="operator">
+                        <div>
+                            =
+                        </div>
+                    </div>
+                    <div class="result">
+                        <h3>Neck, Trunk, Leg Score<div class="result-cov">{{ score_data.final_tabel_b }}</div></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="result-final">
+                <h3>Final Score
+                </h3>
+                <div class="result-data">
+                    <div class="result-value">
+                        {{ score_data.Tabel_c }}
+                    </div>
+                    <div>~</div>
+                    <div class="result-cov">
+                        {{ score_data.final_score }}
+                    </div>
+                </div>
+            </div>
+            <div class="container-btn">
+                <form action="/download_docx" method="post">
+                  <button class="btn-download" type="submit">Download Hasi Evaluasi</button>
+                </form>
+              </div>
+        </div>
+    </div>
+
+    <script>
+        feather.replace();
+    </script>
+
+    <script>
+        // Hide elements with class 'result-cov-str' if their content is empty or contains '[]'
+        document.addEventListener('DOMContentLoaded', function() {
+            var elements = document.querySelectorAll('.result-cov-str');
+            elements.forEach(function(element) {
+                if (element.textContent.trim() === '' || element.textContent.trim() === '[]') {
+                    element.style.display = 'none';
+                }
+            });
+        });
+    </script>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
